@@ -1,0 +1,379 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  Top Level Namespace
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html">Index</a> &raquo; 
+    
+    
+    <span class="title">Top Level Namespace</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><h1>Top Level Namespace
+  
+  
+  
+</h1>
+
+<dl class="box">
+  
+  
+    
+  
+    
+  
+  
+  
+</dl>
+<div class="clear"></div>
+
+<h2>Defined Under Namespace</h2>
+<p class="children">
+   
+    
+      <strong class="modules">Modules:</strong> <span class='object_link'><a href="ChefSpec.html" title="ChefSpec (module)">ChefSpec</a></span>
+    
+   
+    
+      <strong class="classes">Classes:</strong> <span class='object_link'><a href="Hash.html" title="Hash (class)">Hash</a></span>
+    
+  
+</p>
+
+
+
+
+
+  
+    <h2>
+      Instance Method Summary
+      <small>(<a href="#" class="summary_toggle">collapse</a>)</small>
+    </h2>
+
+    <ul class="summary">
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#define_resource_matchers-instance_method" title="#define_resource_matchers (instance method)">- (Object) <strong>define_resource_matchers</strong>(actions, resource_types, name_attribute) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Define simple RSpec matchers for the product of resource types and actions.
+</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#resource_type-instance_method" title="#resource_type (instance method)">- (String) <strong>resource_type</strong>(resource) </a>
+    
+
+    
+  </span>
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>
+Given a resource return the unqualified type it is.
+</p>
+</div></span>
+  
+</li>
+
+      
+    </ul>
+  
+
+
+
+  <div id="instance_method_details" class="method_details_list">
+    <h2>Instance Method Details</h2>
+    
+    
+      <div class="method_details first">
+  <p class="signature first" id="define_resource_matchers-instance_method">
+  
+    - (<tt>Object</tt>) <strong>define_resource_matchers</strong>(actions, resource_types, name_attribute) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Define simple RSpec matchers for the product of resource types and actions
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>actions</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The valid actions - for example [:create, :delete]
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>resource_types</span>
+      
+      
+        <span class='type'>(<tt>Array</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The resource types
+</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>name_attribute</span>
+      
+      
+        <span class='type'>(<tt>Symbol</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The name attribute of the resource types
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/chefspec/matchers/shared.rb', line 14</span>
+
+<span class='def def kw'>def</span> <span class='define_resource_matchers identifier id'>define_resource_matchers</span><span class='lparen token'>(</span><span class='actions identifier id'>actions</span><span class='comma token'>,</span> <span class='resource_types identifier id'>resource_types</span><span class='comma token'>,</span> <span class='name_attribute identifier id'>name_attribute</span><span class='rparen token'>)</span>
+  <span class='actions identifier id'>actions</span><span class='dot token'>.</span><span class='product identifier id'>product</span><span class='lparen token'>(</span><span class='resource_types identifier id'>resource_types</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='flatten identifier id'>flatten</span><span class='dot token'>.</span><span class='each_slice identifier id'>each_slice</span><span class='lparen token'>(</span><span class='integer val'>2</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='action identifier id'>action</span><span class='comma token'>,</span> <span class='resource_type identifier id'>resource_type</span><span class='bitor op'>|</span>
+    <span class='RSpec constant id'>RSpec</span><span class='colon2 op'>::</span><span class='Matchers constant id'>Matchers</span><span class='dot token'>.</span><span class='define identifier id'>define</span> <span class='dstring node'>&quot;#{action}_#{resource_type}&quot;</span><span class='dot token'>.</span><span class='to_sym identifier id'>to_sym</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='name identifier id'>name</span><span class='bitor op'>|</span>
+      <span class='match identifier id'>match</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='chef_run identifier id'>chef_run</span><span class='bitor op'>|</span>
+        <span class='accepted_types identifier id'>accepted_types</span> <span class='assign token'>=</span> <span class='lbrack token'>[</span><span class='resource_type identifier id'>resource_type</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='rbrack token'>]</span>
+        <span class='accepted_types identifier id'>accepted_types</span> <span class='lshft op'>&lt;&lt;</span> <span class='string val'>'template'</span> <span class='if if_mod kw'>if</span> <span class='action identifier id'>action</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='eq op'>==</span> <span class='string val'>'create'</span> <span class='and and kw'>and</span> <span class='resource_type identifier id'>resource_type</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span> <span class='eq op'>==</span> <span class='string val'>'file'</span>
+        <span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='resources identifier id'>resources</span><span class='dot token'>.</span><span class='any? fid id'>any?</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='resource identifier id'>resource</span><span class='bitor op'>|</span>
+          <span class='accepted_types identifier id'>accepted_types</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='resource_type identifier id'>resource_type</span><span class='lparen token'>(</span><span class='resource identifier id'>resource</span><span class='rparen token'>)</span> <span class='and and kw'>and</span> <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='name_attribute identifier id'>name_attribute</span><span class='rparen token'>)</span> <span class='eq op'>==</span> <span class='name identifier id'>name</span> <span class='and and kw'>and</span>
+              <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='action identifier id'>action</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span><span class='dot token'>.</span><span class='include? fid id'>include?</span> <span class='action identifier id'>action</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
+        <span class='end end kw'>end</span>
+      <span class='end end kw'>end</span>
+      <span class='failure_message_for_should identifier id'>failure_message_for_should</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='actual identifier id'>actual</span><span class='bitor op'>|</span>
+        <span class='dstring node'>&quot;No #{resource_type} resource named '#{name}' with action :#{action} found.&quot;</span>
+      <span class='end end kw'>end</span>
+      <span class='failure_message_for_should_not identifier id'>failure_message_for_should_not</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='actual identifier id'>actual</span><span class='bitor op'>|</span>
+        <span class='dstring node'>&quot;Found #{resource_type} resource named '#{name}' with action :#{action} that should not exist.&quot;</span>
+      <span class='end end kw'>end</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+      <div class="method_details ">
+  <p class="signature " id="resource_type-instance_method">
+  
+    - (<tt>String</tt>) <strong>resource_type</strong>(resource) 
+  
+
+  
+</p><div class="docstring">
+  <div class="discussion">
+    <p>
+Given a resource return the unqualified type it is
+</p>
+
+
+  </div>
+</div>
+<div class="tags">
+  <h3>Parameters:</h3>
+<ul class="param">
+  
+    <li>
+      
+        <span class='name'>resource</span>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+A Chef Resource
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+<h3>Returns:</h3>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>String</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>
+The resource type
+</p>
+</div>
+      
+    </li>
+  
+</ul>
+
+</div><table class="source_code">
+  <tr>
+    <td>
+      <pre class="lines">
+
+
+5
+6
+7</pre>
+    </td>
+    <td>
+      <pre class="code"><span class="info file"># File 'lib/chefspec/matchers/shared.rb', line 5</span>
+
+<span class='def def kw'>def</span> <span class='resource_type identifier id'>resource_type</span><span class='lparen token'>(</span><span class='resource identifier id'>resource</span><span class='rparen token'>)</span>
+  <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='name identifier id'>name</span><span class='dot token'>.</span><span class='split identifier id'>split</span><span class='lparen token'>(</span><span class='string val'>&quot;::&quot;</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='downcase identifier id'>downcase</span>
+<span class='end end kw'>end</span>
+</pre>
+    </td>
+  </tr>
+</table>
+</div>
+    
+  </div>
+
+</div>
+    
+    <div id="footer">
+  Generated on Sun Jul 31 13:30:32 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>

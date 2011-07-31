@@ -1,0 +1,247 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>
+  File: README
+  
+    &mdash; Documentation by YARD 0.7.2
+  
+</title>
+
+  <link rel="stylesheet" href="css/style.css" type="text/css" media="screen" charset="utf-8" />
+
+  <link rel="stylesheet" href="css/common.css" type="text/css" media="screen" charset="utf-8" />
+
+<script type="text/javascript" charset="utf-8">
+  relpath = '';
+  if (relpath != '') relpath += '/';
+</script>
+
+  <script type="text/javascript" charset="utf-8" src="js/jquery.js"></script>
+
+  <script type="text/javascript" charset="utf-8" src="js/app.js"></script>
+
+
+  </head>
+  <body>
+    <script type="text/javascript" charset="utf-8">
+      if (window.top.frames.main) document.body.className = 'frames';
+    </script>
+    
+    <div id="header">
+      <div id="menu">
+  
+    <a href="_index.html" title="Index">Index</a> &raquo; 
+    <span class="title">File: README</span>
+  
+  
+  <div class="noframes"><span class="title">(</span><a href="." target="_top">no frames</a><span class="title">)</span></div>
+</div>
+
+      <div id="search">
+  
+    <a id="class_list_link" href="#">Class List</a>
+  
+    <a id="method_list_link" href="#">Method List</a>
+  
+    <a id="file_list_link" href="#">File List</a>
+  
+</div>
+      <div class="clear"></div>
+    </div>
+    
+    <iframe id="search_frame"></iframe>
+    
+    <div id="content"><div id='filecontents'><h1>ChefSpec</h1>
+
+<p>ChefSpec is a gem that makes it easy to write <a href="http://rspec.info/">RSpec</a>  examples for
+<a href="http://www.opscode.com/chef/">Opscode Chef</a> cookbooks. Get fast feedback on cookbook changes before you spin up a node to do integration testing against.</p>
+
+<p>ChefSpec runs your cookbook but without converging the node that your examples are being executed on. This allows you
+to write specs that make assertions about the created resources given the combination of your recipes and arbitrary node
+attributes that you provide.</p>
+
+<h1>Compatibility</h1>
+
+<p><strong>This is alpha-quality at the moment</strong>. The API is likely to change substantially. ChefSpec currently works only with Chef 0.9.12 and has been tested on Ruby 1.8.7. It may make your machine burst into flames or install OS X Lion.</p>
+
+<h1>Quick Start</h1>
+
+<p>Given an existing cookbook directory structure, create a new <code>spec</code> directory within it to hold your specs.</p>
+
+<h2>Writing a cookbook example</h2>
+
+<p>This is a recipe that installs the foo package, and the matching example that expresses that expectation.</p>
+
+<h3>cookbooks/example/recipes/default.rb</h3>
+
+<pre class="code"><span class='package identifier id'>package</span> <span class='string val'>&quot;foo&quot;</span> <span class='do do kw'>do</span>
+  <span class='action identifier id'>action</span> <span class='symbol val'>:install</span>
+<span class='end end kw'>end</span>
+</pre>
+
+<h3>cookbooks/example/spec/default_spec.rb</h3>
+
+<pre class="code"><span class='require identifier id'>require</span> <span class='string val'>&quot;chefspec&quot;</span>
+
+<span class='describe identifier id'>describe</span> <span class='string val'>&quot;example::default&quot;</span> <span class='do do kw'>do</span>
+  <span class='before identifier id'>before</span><span class='lparen token'>(</span><span class='symbol val'>:all</span><span class='rparen token'>)</span> <span class='do do kw'>do</span>
+    <span class='@chef_run ivar id'>@chef_run</span> <span class='assign token'>=</span> <span class='ChefSpec constant id'>ChefSpec</span><span class='colon2 op'>::</span><span class='ChefRunner constant id'>ChefRunner</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+    <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='converge identifier id'>converge</span> <span class='string val'>&quot;example::default&quot;</span>
+  <span class='end end kw'>end</span>
+
+  <span class='it identifier id'>it</span> <span class='string val'>&quot;should install foo&quot;</span> <span class='do do kw'>do</span>
+    <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package identifier id'>install_package</span> <span class='string val'>&quot;foo&quot;</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
+
+<h2>Setting node attributes</h2>
+
+<p>ChefSpec lets you override node attributes (including <a href="http://wiki.opscode.com/display/chef/Ohai">OHAI</a> attributes) as
+you'd expect:</p>
+
+<pre class="code"><span class='it identifier id'>it</span> <span class='string val'>&quot;should log the node platform&quot;</span> <span class='do do kw'>do</span>
+  <span class='@chef_run ivar id'>@chef_run</span> <span class='assign token'>=</span> <span class='ChefSpec constant id'>ChefSpec</span><span class='colon2 op'>::</span><span class='ChefRunner constant id'>ChefRunner</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='node identifier id'>node</span><span class='dot token'>.</span><span class='foo identifier id'>foo</span> <span class='assign token'>=</span> <span class='string val'>&quot;bar&quot;</span>
+  <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='converge identifier id'>converge</span> <span class='string val'>&quot;example::default&quot;</span>
+  <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='log identifier id'>log</span> <span class='string val'>&quot;The value of node.foo is: bar&quot;</span>
+<span class='end end kw'>end</span>
+</pre>
+
+<h1>Matchers</h1>
+
+<p>You can use RSpec <code>should</code> and <code>should_not</code> to define the expected outcome of applying your recipe using the following
+matchers:</p>
+
+<h2>Files and Directories</h2>
+
+<p>Matchers for the Chef <a href="http://wiki.opscode.com/display/chef/Resources#Resources-File">File</a> and <a href="http://wiki.opscode.com/display/chef/Resources#Resources-Directory">Directory</a> resources.</p>
+
+<h3>create_file</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='create_file identifier id'>create_file</span> <span class='string val'>&quot;/var/log/bar.log&quot;</span>
+</pre>
+
+<h3>delete_file</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='delete_file identifier id'>delete_file</span> <span class='string val'>&quot;/var/log/bar.log&quot;</span>
+</pre>
+
+<h3>create_directory</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='create_directory identifier id'>create_directory</span> <span class='string val'>&quot;/var/lib/foo&quot;</span>
+</pre>
+
+<h3>delete_directory</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='delete_directory identifier id'>delete_directory</span> <span class='string val'>&quot;/var/lib/foo&quot;</span>
+</pre>
+
+<h3>be_owned_by</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='file identifier id'>file</span><span class='lparen token'>(</span><span class='string val'>&quot;/var/log/bar.log&quot;</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='be_owned_by identifier id'>be_owned_by</span><span class='lparen token'>(</span><span class='string val'>&quot;user&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;group&quot;</span><span class='rparen token'>)</span>
+<span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='directory identifier id'>directory</span><span class='lparen token'>(</span><span class='string val'>&quot;/var/lib/foo&quot;</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='be_owned_by identifier id'>be_owned_by</span><span class='lparen token'>(</span><span class='string val'>&quot;user&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;group&quot;</span><span class='rparen token'>)</span>
+</pre>
+
+<h2>Packages</h2>
+
+<p>Matchers for the Chef <a href="http://wiki.opscode.com/display/chef/Resources#Resources-Package">Package</a> resource.</p>
+
+<h3>install_package</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package identifier id'>install_package</span> <span class='string val'>&quot;foo&quot;</span>
+<span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package_at_version identifier id'>install_package_at_version</span> <span class='string val'>&quot;foo&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;1.2.3&quot;</span>
+</pre>
+
+<h3>purge_package</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='purge_package identifier id'>purge_package</span> <span class='string val'>&quot;foo&quot;</span>
+</pre>
+
+<h3>remove_package</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='remove_package identifier id'>remove_package</span> <span class='string val'>&quot;foo&quot;</span>
+</pre>
+
+<h3>upgrade_package</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='upgrade_package identifier id'>upgrade_package</span> <span class='string val'>&quot;foo&quot;</span>
+</pre>
+
+<h2>Execute</h2>
+
+<p>Matcher for the Chef <a href="http://wiki.opscode.com/display/chef/Resources#Resources-Execute">Execute</a> resource.</p>
+
+<h3>execute_command</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='execute_command identifier id'>execute_command</span> <span class='string val'>&quot;whoami&quot;</span>
+</pre>
+
+<h2>Logging</h2>
+
+<p>Matcher for the Chef <a href="http://wiki.opscode.com/display/chef/Resources#Resources-Log">Log</a> resource.</p>
+
+<h3>log</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='log identifier id'>log</span> <span class='string val'>&quot;A log message from my recipe&quot;</span>
+</pre>
+
+<h2>Services</h2>
+
+<p>Matchers for the Chef <a href="http://wiki.opscode.com/display/chef/Resources#Resources-Service">Service</a> resource.</p>
+
+<h3>start_service</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='start_service identifier id'>start_service</span> <span class='string val'>&quot;food&quot;</span>
+</pre>
+
+<h3>set_service_to_start_on_boot</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='set_service_to_start_on_boot identifier id'>set_service_to_start_on_boot</span> <span class='string val'>&quot;food&quot;</span>
+</pre>
+
+<h3>stop_service</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='stop_service identifier id'>stop_service</span> <span class='string val'>&quot;food&quot;</span>
+</pre>
+
+<h3>restart_service</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='restart_service identifier id'>restart_service</span> <span class='string val'>&quot;food&quot;</span>
+</pre>
+
+<h3>reload_service</h3>
+
+<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='reload_service identifier id'>reload_service</span> <span class='string val'>&quot;food&quot;</span>
+</pre>
+
+<h1>More Examples</h1>
+
+<p>There are further examples of using ChefSpec in the <code>features</code> directory.</p>
+
+<h1>Building</h1>
+
+<pre class="code">$ <span class='bundle identifier id'>bundle</span> <span class='install identifier id'>install</span>
+$ <span class='rake identifier id'>rake</span>
+</pre>
+
+<h1>License</h1>
+
+<p>MIT - see the accompanying LICENSE file for details.</p>
+
+<h1>Contributing</h1>
+
+<p>Additional matchers and bugfixes are welcome! Please fork and submit a pull request on an individual branch per change.</p>
+</div></div>
+    
+    <div id="footer">
+  Generated on Sun Jul 31 13:30:31 2011 by 
+  <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
+  0.7.2 (ruby-1.8.7).
+</div>
+
+  </body>
+</html>
