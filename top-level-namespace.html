@@ -357,7 +357,7 @@ The resource type
       <pre class="code"><span class="info file"># File 'lib/chefspec/matchers/shared.rb', line 5</span>
 
 <span class='def def kw'>def</span> <span class='resource_type identifier id'>resource_type</span><span class='lparen token'>(</span><span class='resource identifier id'>resource</span><span class='rparen token'>)</span>
-  <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='class identifier id'>class</span><span class='dot token'>.</span><span class='name identifier id'>name</span><span class='dot token'>.</span><span class='split identifier id'>split</span><span class='lparen token'>(</span><span class='string val'>&quot;::&quot;</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='last identifier id'>last</span><span class='dot token'>.</span><span class='downcase identifier id'>downcase</span>
+  <span class='resource identifier id'>resource</span><span class='dot token'>.</span><span class='resource_name identifier id'>resource_name</span><span class='dot token'>.</span><span class='to_s identifier id'>to_s</span>
 <span class='end end kw'>end</span>
 </pre>
     </td>
@@ -370,7 +370,7 @@ The resource type
 </div>
     
     <div id="footer">
-  Generated on Sun Jul 31 13:30:32 2011 by 
+  Generated on Tue Aug  9 22:34:12 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.7.2 (ruby-1.8.7).
 </div>
