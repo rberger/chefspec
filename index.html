@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>
   File: README
   
@@ -77,38 +77,46 @@ attributes that you provide.</p>
 
 <h3>cookbooks/example/recipes/default.rb</h3>
 
-<pre class="code"><span class='package identifier id'>package</span> <span class='string val'>&quot;foo&quot;</span> <span class='do do kw'>do</span>
-  <span class='action identifier id'>action</span> <span class='symbol val'>:install</span>
-<span class='end end kw'>end</span>
+<pre class="code"><span class='id package'>package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+  <span class='id action'>action</span> <span class='symbol'>:install</span>
+<span class='kw'>end</span>
 </pre>
 
 <h3>cookbooks/example/spec/default_spec.rb</h3>
 
-<pre class="code"><span class='require identifier id'>require</span> <span class='string val'>&quot;chefspec&quot;</span>
+<pre class="code"><span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chefspec</span><span class='tstring_end'>&quot;</span></span>
 
-<span class='describe identifier id'>describe</span> <span class='string val'>&quot;example::default&quot;</span> <span class='do do kw'>do</span>
-  <span class='before identifier id'>before</span><span class='lparen token'>(</span><span class='symbol val'>:all</span><span class='rparen token'>)</span> <span class='do do kw'>do</span>
-    <span class='@chef_run ivar id'>@chef_run</span> <span class='assign token'>=</span> <span class='ChefSpec constant id'>ChefSpec</span><span class='colon2 op'>::</span><span class='ChefRunner constant id'>ChefRunner</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-    <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='converge identifier id'>converge</span> <span class='string val'>&quot;example::default&quot;</span>
-  <span class='end end kw'>end</span>
+<span class='id describe'>describe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example::default</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+  <span class='id before'>before</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='rparen'>)</span> <span class='kw'>do</span>
+    <span class='ivar'>@chef_run</span> <span class='op'>=</span> <span class='const'>ChefSpec</span><span class='op'>::</span><span class='const'>ChefRunner</span><span class='period'>.</span><span class='id new'>new</span>
+    <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id converge'>converge</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example::default</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
 
-  <span class='it identifier id'>it</span> <span class='string val'>&quot;should install foo&quot;</span> <span class='do do kw'>do</span>
-    <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package identifier id'>install_package</span> <span class='string val'>&quot;foo&quot;</span>
-  <span class='end end kw'>end</span>
-<span class='end end kw'>end</span>
+  <span class='id it'>it</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>should install foo</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+    <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id install_package'>install_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
+  <span class='kw'>end</span>
+<span class='kw'>end</span>
 </pre>
 
 <h2>Setting node attributes</h2>
 
-<p>ChefSpec lets you override node attributes (including <a href="http://wiki.opscode.com/display/chef/Ohai">OHAI</a> attributes) as
+<p>ChefSpec lets you set node attributes (including <a href="http://wiki.opscode.com/display/chef/Ohai">OHAI</a> attributes) as
 you'd expect:</p>
 
-<pre class="code"><span class='it identifier id'>it</span> <span class='string val'>&quot;should log the node platform&quot;</span> <span class='do do kw'>do</span>
-  <span class='@chef_run ivar id'>@chef_run</span> <span class='assign token'>=</span> <span class='ChefSpec constant id'>ChefSpec</span><span class='colon2 op'>::</span><span class='ChefRunner constant id'>ChefRunner</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
-  <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='node identifier id'>node</span><span class='dot token'>.</span><span class='foo identifier id'>foo</span> <span class='assign token'>=</span> <span class='string val'>&quot;bar&quot;</span>
-  <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='converge identifier id'>converge</span> <span class='string val'>&quot;example::default&quot;</span>
-  <span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='log identifier id'>log</span> <span class='string val'>&quot;The value of node.foo is: bar&quot;</span>
-<span class='end end kw'>end</span>
+<pre class="code"><span class='id it'>it</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>should log the node platform</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
+  <span class='ivar'>@chef_run</span> <span class='op'>=</span> <span class='const'>ChefSpec</span><span class='op'>::</span><span class='const'>ChefRunner</span><span class='period'>.</span><span class='id new'>new</span>
+  <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id node'>node</span><span class='period'>.</span><span class='id foo'>foo</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id converge'>converge</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example::default</span><span class='tstring_end'>&quot;</span></span>
+  <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The value of node.foo is: bar</span><span class='tstring_end'>&quot;</span></span>
+<span class='kw'>end</span>
+</pre>
+
+<p>You can also pass a block to set the node attributes:</p>
+
+<pre class="code"><span class='id runner'>runner</span> <span class='op'>=</span> <span class='const'>ChefSpec</span><span class='op'>::</span><span class='const'>ChefRunner</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id node'>node</span><span class='op'>|</span>
+  <span class='id node'>node</span><span class='lbracket'>[</span><span class='symbol'>:my_attribute</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bar</span><span class='tstring_end'>'</span></span>
+  <span class='id node'>node</span><span class='lbracket'>[</span><span class='symbol'>:my_other_attribute</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bar2</span><span class='tstring_end'>'</span></span>
+<span class='kw'>end</span>
 </pre>
 
 <h1>Matchers</h1>
@@ -122,28 +130,28 @@ matchers:</p>
 
 <h3>create_file</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='create_file identifier id'>create_file</span> <span class='string val'>&quot;/var/log/bar.log&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id create_file'>create_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/log/bar.log</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>delete_file</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='delete_file identifier id'>delete_file</span> <span class='string val'>&quot;/var/log/bar.log&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id delete_file'>delete_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/log/bar.log</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>create_directory</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='create_directory identifier id'>create_directory</span> <span class='string val'>&quot;/var/lib/foo&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id create_directory'>create_directory</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/lib/foo</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>delete_directory</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='delete_directory identifier id'>delete_directory</span> <span class='string val'>&quot;/var/lib/foo&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id delete_directory'>delete_directory</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/lib/foo</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>be_owned_by</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='file identifier id'>file</span><span class='lparen token'>(</span><span class='string val'>&quot;/var/log/bar.log&quot;</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='be_owned_by identifier id'>be_owned_by</span><span class='lparen token'>(</span><span class='string val'>&quot;user&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;group&quot;</span><span class='rparen token'>)</span>
-<span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='directory identifier id'>directory</span><span class='lparen token'>(</span><span class='string val'>&quot;/var/lib/foo&quot;</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='be_owned_by identifier id'>be_owned_by</span><span class='lparen token'>(</span><span class='string val'>&quot;user&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;group&quot;</span><span class='rparen token'>)</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id file'>file</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/log/bar.log</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id should'>should</span> <span class='id be_owned_by'>be_owned_by</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id directory'>directory</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/lib/foo</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id should'>should</span> <span class='id be_owned_by'>be_owned_by</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 </pre>
 
 <h2>Packages</h2>
@@ -152,23 +160,23 @@ matchers:</p>
 
 <h3>install_package</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package identifier id'>install_package</span> <span class='string val'>&quot;foo&quot;</span>
-<span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package_at_version identifier id'>install_package_at_version</span> <span class='string val'>&quot;foo&quot;</span><span class='comma token'>,</span> <span class='string val'>&quot;1.2.3&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id install_package'>install_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
+<span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id install_package_at_version'>install_package_at_version</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.2.3</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>purge_package</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='purge_package identifier id'>purge_package</span> <span class='string val'>&quot;foo&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id purge_package'>purge_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>remove_package</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='remove_package identifier id'>remove_package</span> <span class='string val'>&quot;foo&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id remove_package'>remove_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>upgrade_package</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='upgrade_package identifier id'>upgrade_package</span> <span class='string val'>&quot;foo&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id upgrade_package'>upgrade_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h2>Execute</h2>
@@ -177,7 +185,7 @@ matchers:</p>
 
 <h3>execute_command</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='execute_command identifier id'>execute_command</span> <span class='string val'>&quot;whoami&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id execute_command'>execute_command</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>whoami</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h2>Logging</h2>
@@ -186,7 +194,7 @@ matchers:</p>
 
 <h3>log</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='log identifier id'>log</span> <span class='string val'>&quot;A log message from my recipe&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A log message from my recipe</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h2>Services</h2>
@@ -195,27 +203,27 @@ matchers:</p>
 
 <h3>start_service</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='start_service identifier id'>start_service</span> <span class='string val'>&quot;food&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id start_service'>start_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>set_service_to_start_on_boot</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='set_service_to_start_on_boot identifier id'>set_service_to_start_on_boot</span> <span class='string val'>&quot;food&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id set_service_to_start_on_boot'>set_service_to_start_on_boot</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>stop_service</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='stop_service identifier id'>stop_service</span> <span class='string val'>&quot;food&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id stop_service'>stop_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>restart_service</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='restart_service identifier id'>restart_service</span> <span class='string val'>&quot;food&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id restart_service'>restart_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h3>reload_service</h3>
 
-<pre class="code"><span class='@chef_run ivar id'>@chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='reload_service identifier id'>reload_service</span> <span class='string val'>&quot;food&quot;</span>
+<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id reload_service'>reload_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
 </pre>
 
 <h1>More Examples</h1>
@@ -224,8 +232,8 @@ matchers:</p>
 
 <h1>Building</h1>
 
-<pre class="code">$ <span class='bundle identifier id'>bundle</span> <span class='install identifier id'>install</span>
-$ <span class='rake identifier id'>rake</span>
+<pre class="code">$ bundle install
+$ bundle exec rake
 </pre>
 
 <h1>Continuous Integration</h1>
@@ -244,9 +252,9 @@ $ <span class='rake identifier id'>rake</span>
 </div></div>
     
     <div id="footer">
-  Generated on Tue Aug  9 22:34:11 2011 by 
+  Generated on Mon Sep 19 22:59:58 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.8.7).
+  0.7.2 (ruby-1.9.2).
 </div>
 
   </body>
