@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>
   File: README
   
@@ -57,7 +57,8 @@
     <div id="content"><div id='filecontents'><h1>ChefSpec</h1>
 
 <p>ChefSpec is a gem that makes it easy to write <a href="http://rspec.info/">RSpec</a>  examples for
-<a href="http://www.opscode.com/chef/">Opscode Chef</a> cookbooks. Get fast feedback on cookbook changes before you spin up a node to do integration testing against.</p>
+<a href="http://www.opscode.com/chef/">Opscode Chef</a> cookbooks. Get fast feedback on cookbook changes before you spin up a node
+to do integration testing against.</p>
 
 <p>ChefSpec runs your cookbook but without converging the node that your examples are being executed on. This allows you
 to write specs that make assertions about the created resources given the combination of your recipes and arbitrary node
@@ -65,7 +66,8 @@ attributes that you provide.</p>
 
 <h1>Compatibility</h1>
 
-<p><strong>This is alpha-quality at the moment</strong>. The API is likely to change substantially. ChefSpec is currently tested with Chef 0.9.12 and 0.10.2 on MRI 1.8.7 and 1.9.2. It may make your machine burst into flames or install OS X Lion.</p>
+<p><strong>This is alpha-quality at the moment</strong>. The API is likely to change substantially. ChefSpec is currently tested with
+Chef 0.9.18, 0.10.2 and 0.10.4 on MRI 1.8.7 and 1.9.2. It may make your machine burst into flames or install OS X Lion.</p>
 
 <h1>Quick Start</h1>
 
@@ -77,25 +79,21 @@ attributes that you provide.</p>
 
 <h3>cookbooks/example/recipes/default.rb</h3>
 
-<pre class="code"><span class='id package'>package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
-  <span class='id action'>action</span> <span class='symbol'>:install</span>
-<span class='kw'>end</span>
+<pre class="code"><span class='package identifier id'>package</span> <span class='string val'>&quot;foo&quot;</span> <span class='do do kw'>do</span>
+  <span class='action identifier id'>action</span> <span class='symbol val'>:install</span>
+<span class='end end kw'>end</span>
 </pre>
 
 <h3>cookbooks/example/spec/default_spec.rb</h3>
 
-<pre class="code"><span class='id require'>require</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>chefspec</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='require identifier id'>require</span> <span class='string val'>&quot;chefspec&quot;</span>
 
-<span class='id describe'>describe</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example::default</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
-  <span class='id before'>before</span><span class='lparen'>(</span><span class='symbol'>:all</span><span class='rparen'>)</span> <span class='kw'>do</span>
-    <span class='ivar'>@chef_run</span> <span class='op'>=</span> <span class='const'>ChefSpec</span><span class='op'>::</span><span class='const'>ChefRunner</span><span class='period'>.</span><span class='id new'>new</span>
-    <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id converge'>converge</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example::default</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-
-  <span class='id it'>it</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>should install foo</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
-    <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id install_package'>install_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span>
+<span class='describe identifier id'>describe</span> <span class='string val'>&quot;example::default&quot;</span> <span class='do do kw'>do</span>
+  <span class='let identifier id'>let</span> <span class='lparen token'>(</span><span class='symbol val'>:chef_run</span><span class='rparen token'>)</span> <span class='lbrace token'>{</span><span class='ChefSpec constant id'>ChefSpec</span><span class='colon2 op'>::</span><span class='ChefRunner constant id'>ChefRunner</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='dot token'>.</span><span class='converge identifier id'>converge</span> <span class='string val'>'example::default'</span><span class='rbrace token'>}</span>
+  <span class='it identifier id'>it</span> <span class='string val'>&quot;should install foo&quot;</span> <span class='do do kw'>do</span>
+    <span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package identifier id'>install_package</span> <span class='string val'>'foo'</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
 </pre>
 
 <h2>Setting node attributes</h2>
@@ -103,20 +101,20 @@ attributes that you provide.</p>
 <p>ChefSpec lets you set node attributes (including <a href="http://wiki.opscode.com/display/chef/Ohai">OHAI</a> attributes) as
 you'd expect:</p>
 
-<pre class="code"><span class='id it'>it</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>should log the node platform</span><span class='tstring_end'>&quot;</span></span> <span class='kw'>do</span>
-  <span class='ivar'>@chef_run</span> <span class='op'>=</span> <span class='const'>ChefSpec</span><span class='op'>::</span><span class='const'>ChefRunner</span><span class='period'>.</span><span class='id new'>new</span>
-  <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id node'>node</span><span class='period'>.</span><span class='id foo'>foo</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>bar</span><span class='tstring_end'>&quot;</span></span>
-  <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id converge'>converge</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>example::default</span><span class='tstring_end'>&quot;</span></span>
-  <span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>The value of node.foo is: bar</span><span class='tstring_end'>&quot;</span></span>
-<span class='kw'>end</span>
+<pre class="code"><span class='it identifier id'>it</span> <span class='string val'>&quot;should log the node platform&quot;</span> <span class='do do kw'>do</span>
+  <span class='chef_run identifier id'>chef_run</span> <span class='assign token'>=</span> <span class='ChefSpec constant id'>ChefSpec</span><span class='colon2 op'>::</span><span class='ChefRunner constant id'>ChefRunner</span><span class='dot token'>.</span><span class='new identifier id'>new</span>
+  <span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='node identifier id'>node</span><span class='dot token'>.</span><span class='foo identifier id'>foo</span> <span class='assign token'>=</span> <span class='string val'>'bar'</span>
+  <span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='converge identifier id'>converge</span> <span class='string val'>'example::default'</span>
+  <span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='log identifier id'>log</span> <span class='string val'>'The value of node.foo is: bar'</span>
+<span class='end end kw'>end</span>
 </pre>
 
 <p>You can also pass a block to set the node attributes:</p>
 
-<pre class="code"><span class='id runner'>runner</span> <span class='op'>=</span> <span class='const'>ChefSpec</span><span class='op'>::</span><span class='const'>ChefRunner</span><span class='period'>.</span><span class='id new'>new</span><span class='lparen'>(</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id node'>node</span><span class='op'>|</span>
-  <span class='id node'>node</span><span class='lbracket'>[</span><span class='symbol'>:my_attribute</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bar</span><span class='tstring_end'>'</span></span>
-  <span class='id node'>node</span><span class='lbracket'>[</span><span class='symbol'>:my_other_attribute</span><span class='rbracket'>]</span> <span class='op'>=</span> <span class='tstring'><span class='tstring_beg'>'</span><span class='tstring_content'>bar2</span><span class='tstring_end'>'</span></span>
-<span class='kw'>end</span>
+<pre class="code"><span class='runner identifier id'>runner</span> <span class='assign token'>=</span> <span class='ChefSpec constant id'>ChefSpec</span><span class='colon2 op'>::</span><span class='ChefRunner constant id'>ChefRunner</span><span class='dot token'>.</span><span class='new identifier id'>new</span><span class='lparen token'>(</span><span class='rparen token'>)</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='node identifier id'>node</span><span class='bitor op'>|</span>
+  <span class='node identifier id'>node</span><span class='lbrack token'>[</span><span class='symbol val'>:my_attribute</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>'bar'</span>
+  <span class='node identifier id'>node</span><span class='lbrack token'>[</span><span class='symbol val'>:my_other_attribute</span><span class='rbrack token'>]</span> <span class='assign token'>=</span> <span class='string val'>'bar2'</span>
+<span class='end end kw'>end</span>
 </pre>
 
 <h1>Matchers</h1>
@@ -130,28 +128,28 @@ matchers:</p>
 
 <h3>create_file</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id create_file'>create_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/log/bar.log</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='create_file identifier id'>create_file</span> <span class='string val'>'/var/log/bar.log'</span>
 </pre>
 
 <h3>delete_file</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id delete_file'>delete_file</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/log/bar.log</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='delete_file identifier id'>delete_file</span> <span class='string val'>'/var/log/bar.log'</span>
 </pre>
 
 <h3>create_directory</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id create_directory'>create_directory</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/lib/foo</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='create_directory identifier id'>create_directory</span> <span class='string val'>'/var/lib/foo'</span>
 </pre>
 
 <h3>delete_directory</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id delete_directory'>delete_directory</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/lib/foo</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='delete_directory identifier id'>delete_directory</span> <span class='string val'>'/var/lib/foo'</span>
 </pre>
 
 <h3>be_owned_by</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id file'>file</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/log/bar.log</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id should'>should</span> <span class='id be_owned_by'>be_owned_by</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
-<span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id directory'>directory</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>/var/lib/foo</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='period'>.</span><span class='id should'>should</span> <span class='id be_owned_by'>be_owned_by</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>user</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>group</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='file identifier id'>file</span><span class='lparen token'>(</span><span class='string val'>'/var/log/bar.log'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='be_owned_by identifier id'>be_owned_by</span><span class='lparen token'>(</span><span class='string val'>'user'</span><span class='comma token'>,</span> <span class='string val'>'group'</span><span class='rparen token'>)</span>
+<span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='directory identifier id'>directory</span><span class='lparen token'>(</span><span class='string val'>'/var/lib/foo'</span><span class='rparen token'>)</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='be_owned_by identifier id'>be_owned_by</span><span class='lparen token'>(</span><span class='string val'>'user'</span><span class='comma token'>,</span> <span class='string val'>'group'</span><span class='rparen token'>)</span>
 </pre>
 
 <h2>Packages</h2>
@@ -160,23 +158,23 @@ matchers:</p>
 
 <h3>install_package</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id install_package'>install_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
-<span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id install_package_at_version'>install_package_at_version</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>1.2.3</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package identifier id'>install_package</span> <span class='string val'>'foo'</span>
+<span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='install_package_at_version identifier id'>install_package_at_version</span> <span class='string val'>'foo'</span><span class='comma token'>,</span> <span class='string val'>'1.2.3'</span>
 </pre>
 
 <h3>purge_package</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id purge_package'>purge_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='purge_package identifier id'>purge_package</span> <span class='string val'>'foo'</span>
 </pre>
 
 <h3>remove_package</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id remove_package'>remove_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='remove_package identifier id'>remove_package</span> <span class='string val'>'foo'</span>
 </pre>
 
 <h3>upgrade_package</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id upgrade_package'>upgrade_package</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>foo</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='upgrade_package identifier id'>upgrade_package</span> <span class='string val'>'foo'</span>
 </pre>
 
 <h2>Execute</h2>
@@ -185,7 +183,7 @@ matchers:</p>
 
 <h3>execute_command</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id execute_command'>execute_command</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>whoami</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='execute_command identifier id'>execute_command</span> <span class='string val'>&quot;whoami&quot;</span>
 </pre>
 
 <h2>Logging</h2>
@@ -194,7 +192,7 @@ matchers:</p>
 
 <h3>log</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id log'>log</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>A log message from my recipe</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='log identifier id'>log</span> <span class='string val'>'A log message from my recipe'</span>
 </pre>
 
 <h2>Services</h2>
@@ -203,27 +201,27 @@ matchers:</p>
 
 <h3>start_service</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id start_service'>start_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='start_service identifier id'>start_service</span> <span class='string val'>'food'</span>
 </pre>
 
 <h3>set_service_to_start_on_boot</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id set_service_to_start_on_boot'>set_service_to_start_on_boot</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='set_service_to_start_on_boot identifier id'>set_service_to_start_on_boot</span> <span class='string val'>'food'</span>
 </pre>
 
 <h3>stop_service</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id stop_service'>stop_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='stop_service identifier id'>stop_service</span> <span class='string val'>'food'</span>
 </pre>
 
 <h3>restart_service</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id restart_service'>restart_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='restart_service identifier id'>restart_service</span> <span class='string val'>'food'</span>
 </pre>
 
 <h3>reload_service</h3>
 
-<pre class="code"><span class='ivar'>@chef_run</span><span class='period'>.</span><span class='id should'>should</span> <span class='id reload_service'>reload_service</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>food</span><span class='tstring_end'>&quot;</span></span>
+<pre class="code"><span class='chef_run identifier id'>chef_run</span><span class='dot token'>.</span><span class='should identifier id'>should</span> <span class='reload_service identifier id'>reload_service</span> <span class='string val'>'food'</span>
 </pre>
 
 <h1>More Examples</h1>
@@ -232,8 +230,8 @@ matchers:</p>
 
 <h1>Building</h1>
 
-<pre class="code">$ bundle install
-$ bundle exec rake
+<pre class="code">$ <span class='bundle identifier id'>bundle</span> <span class='install identifier id'>install</span>
+$ <span class='bundle identifier id'>bundle</span> <span class='exec identifier id'>exec</span> <span class='rake identifier id'>rake</span>
 </pre>
 
 <h1>Continuous Integration</h1>
@@ -246,15 +244,19 @@ $ bundle exec rake
 
 <p>MIT - see the accompanying LICENSE file for details.</p>
 
+<h1>Changelog</h1>
+
+<p>To see what has changed in recent versions see the <a href="https://github.com/acrmp/chefspec/blob/master/CHANGELOG.md">CHANGELOG</a></p>
+
 <h1>Contributing</h1>
 
 <p>Additional matchers and bugfixes are welcome! Please fork and submit a pull request on an individual branch per change.</p>
 </div></div>
     
     <div id="footer">
-  Generated on Mon Sep 19 22:59:58 2011 by 
+  Generated on Wed Sep 21 23:06:57 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.9.2).
+  0.7.2 (ruby-1.8.7).
 </div>
 
   </body>

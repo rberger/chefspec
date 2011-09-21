@@ -201,10 +201,11 @@ Remove any existing Chef provider or resource with the specified name.
     <td>
       <pre class="code"><span class="info file"># File 'lib/chefspec/monkey_patches/provider.rb', line 7</span>
 
-<span class='kw'>def</span> <span class='id build_from_file'>build_from_file</span><span class='lparen'>(</span><span class='id cookbook_name'>cookbook_name</span><span class='comma'>,</span> <span class='id filename'>filename</span><span class='comma'>,</span> <span class='id run_context'>run_context</span><span class='rparen'>)</span>
-  <span class='id remove_existing_lwrp'>remove_existing_lwrp</span><span class='lparen'>(</span><span class='id convert_to_class_name'>convert_to_class_name</span><span class='lparen'>(</span><span class='id filename_to_qualified_string'>filename_to_qualified_string</span><span class='lparen'>(</span><span class='id cookbook_name'>cookbook_name</span><span class='comma'>,</span> <span class='id filename'>filename</span><span class='rparen'>)</span><span class='rparen'>)</span><span class='rparen'>)</span>
-  <span class='id old_build_from_file'>old_build_from_file</span><span class='lparen'>(</span><span class='id cookbook_name'>cookbook_name</span><span class='comma'>,</span> <span class='id filename'>filename</span><span class='comma'>,</span> <span class='id run_context'>run_context</span><span class='rparen'>)</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='build_from_file identifier id'>build_from_file</span><span class='lparen token'>(</span><span class='cookbook_name identifier id'>cookbook_name</span><span class='comma token'>,</span> <span class='filename identifier id'>filename</span><span class='comma token'>,</span> <span class='run_context identifier id'>run_context</span><span class='rparen token'>)</span>
+  <span class='remove_existing_lwrp identifier id'>remove_existing_lwrp</span><span class='lparen token'>(</span><span class='convert_to_class_name identifier id'>convert_to_class_name</span><span class='lparen token'>(</span><span class='filename_to_qualified_string identifier id'>filename_to_qualified_string</span><span class='lparen token'>(</span><span class='cookbook_name identifier id'>cookbook_name</span><span class='comma token'>,</span> <span class='filename identifier id'>filename</span><span class='rparen token'>)</span><span class='rparen token'>)</span><span class='rparen token'>)</span>
+  <span class='old_build_from_file identifier id'>old_build_from_file</span><span class='lparen token'>(</span><span class='cookbook_name identifier id'>cookbook_name</span><span class='comma token'>,</span> <span class='filename identifier id'>filename</span><span class='comma token'>,</span> <span class='run_context identifier id'>run_context</span><span class='rparen token'>)</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -228,7 +229,8 @@ Remove any existing Chef provider or resource with the specified name.
     <td>
       <pre class="code"><span class="info file"># File 'lib/chefspec/monkey_patches/provider.rb', line 5</span>
 
-<span class='kw'>alias</span> <span class='symbol'>:old_build_from_file</span> <span class='symbol'>:build_from_file</span></pre>
+<span class='alias alias kw'>alias</span> <span class='symbol val'>:old_build_from_file</span> <span class='symbol val'>:build_from_file</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -290,13 +292,14 @@ The class name. Must be a valid constant name.
     <td>
       <pre class="code"><span class="info file"># File 'lib/chefspec/monkey_patches/provider.rb', line 15</span>
 
-<span class='kw'>def</span> <span class='id remove_existing_lwrp'>remove_existing_lwrp</span><span class='lparen'>(</span><span class='id class_name'>class_name</span><span class='rparen'>)</span>
-  <span class='lbracket'>[</span><span class='const'>Chef</span><span class='op'>::</span><span class='const'>Resource</span><span class='comma'>,</span> <span class='const'>Chef</span><span class='op'>::</span><span class='const'>Provider</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id each'>each</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id resource_holder'>resource_holder</span><span class='op'>|</span>
-    <span class='kw'>if</span> <span class='id resource_holder'>resource_holder</span><span class='period'>.</span><span class='id const_defined?'>const_defined?</span> <span class='id class_name'>class_name</span>
-      <span class='id resource_holder'>resource_holder</span><span class='period'>.</span><span class='id send'>send</span><span class='lparen'>(</span><span class='symbol'>:remove_const</span><span class='comma'>,</span> <span class='id class_name'>class_name</span><span class='rparen'>)</span>
-    <span class='kw'>end</span>
-  <span class='kw'>end</span>
-<span class='kw'>end</span></pre>
+<span class='def def kw'>def</span> <span class='remove_existing_lwrp identifier id'>remove_existing_lwrp</span><span class='lparen token'>(</span><span class='class_name identifier id'>class_name</span><span class='rparen token'>)</span>
+  <span class='lbrack token'>[</span><span class='Chef constant id'>Chef</span><span class='colon2 op'>::</span><span class='Resource constant id'>Resource</span><span class='comma token'>,</span> <span class='Chef constant id'>Chef</span><span class='colon2 op'>::</span><span class='Provider constant id'>Provider</span><span class='rbrack token'>]</span><span class='dot token'>.</span><span class='each identifier id'>each</span> <span class='do do kw'>do</span> <span class='bitor op'>|</span><span class='resource_holder identifier id'>resource_holder</span><span class='bitor op'>|</span>
+    <span class='if if kw'>if</span> <span class='resource_holder identifier id'>resource_holder</span><span class='dot token'>.</span><span class='const_defined? fid id'>const_defined?</span> <span class='class_name identifier id'>class_name</span>
+      <span class='resource_holder identifier id'>resource_holder</span><span class='dot token'>.</span><span class='send identifier id'>send</span><span class='lparen token'>(</span><span class='symbol val'>:remove_const</span><span class='comma token'>,</span> <span class='class_name identifier id'>class_name</span><span class='rparen token'>)</span>
+    <span class='end end kw'>end</span>
+  <span class='end end kw'>end</span>
+<span class='end end kw'>end</span>
+</pre>
     </td>
   </tr>
 </table>
@@ -307,9 +310,9 @@ The class name. Must be a valid constant name.
 </div>
     
     <div id="footer">
-  Generated on Mon Sep 19 22:59:58 2011 by 
+  Generated on Wed Sep 21 23:06:58 2011 by 
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.7.2 (ruby-1.9.2).
+  0.7.2 (ruby-1.8.7).
 </div>
 
   </body>
